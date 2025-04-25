@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        myrigidbody.velocity = new Vector3(horizontal, 0, transversal);
+        myrigidbody.velocity = new Vector3(horizontal * speed, 0, transversal * speed);
     }
     public void OnMovementX(InputAction.CallbackContext context)
     {
