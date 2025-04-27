@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public static event Action OnPlayerRoom1Collision;
     private Rigidbody myrigidbody;
     private float horizontal;
     private float transversal;
@@ -12,6 +14,14 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         myrigidbody = GetComponent<Rigidbody>();
+    }
+    private void OnEnable()
+    {
+        //OnPlayerRoom1Collision = +
+    }
+    private void OnDisable()
+    {
+        
     }
     private void FixedUpdate()
     {
@@ -28,5 +38,12 @@ public class Player : MonoBehaviour
     public void OnJumping()
     {
 
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "room")
+        {
+            OnPlayerRoom1Collision();
+        }
     }
 }
