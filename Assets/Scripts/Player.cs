@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public AudioSource sound;
     public AudioSettings SFX;
     public AudioData walk;
+    public static event Action OnChange;
     private void Awake()
     {
         myrigidbody = GetComponent<Rigidbody>();
@@ -45,6 +46,13 @@ public class Player : MonoBehaviour
         if (context.ReadValue<float>() == 0)
         {
             sound.Stop();
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Change")
+        {
+            OnChange?.Invoke();
         }
     }
     //public void OnJumping()
