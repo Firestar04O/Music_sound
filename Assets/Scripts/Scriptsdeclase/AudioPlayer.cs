@@ -14,8 +14,9 @@ public class AudioPlayer : MonoBehaviour
         InteractableObjects.OnCollisionMusic -= PlayPlayer;
 
     }
-    private void PlayPlayer(AudioMixerGroup currentGroup, AudioClip currentAudioClip)
+    public void PlayPlayer(AudioMixerGroup currentGroup, AudioClip currentAudioClip)
     {
+
         if (currentGroup == musicPlayer.PlayerChannel)
         {
             musicPlayer.PlayClip(currentAudioClip);
@@ -23,7 +24,6 @@ public class AudioPlayer : MonoBehaviour
         else
         {
             sfxPlayer.PlayClip(currentAudioClip);
-
         }
     }
 }

@@ -3,25 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Audio;
 
 public class Player : MonoBehaviour
 {
-    public static event Action OnPlayerRoom1Collision;
     private Rigidbody myrigidbody;
     private float horizontal;
     private float transversal;
     public int speed;
+    public AudioPlayer music;
+    public AudioSource sound;
+    public AudioSettings SFX;
+    public AudioData walk;
     private void Awake()
     {
         myrigidbody = GetComponent<Rigidbody>();
-    }
-    private void OnEnable()
-    {
-        //OnPlayerRoom1Collision = +
-    }
-    private void OnDisable()
-    {
-        
     }
     private void FixedUpdate()
     {
@@ -30,20 +26,29 @@ public class Player : MonoBehaviour
     public void OnMovementX(InputAction.CallbackContext context)
     {
         horizontal = context.ReadValue<float>();
+        if (!sound.isPlaying)
+        {
+            music.PlayPlayer(SFX.AudioMixerGroup, walk.AudioClip);
+        }
+        if (context.ReadValue<float>() == 0)
+        {
+            sound.Stop();
+        }
     }
     public void OnMovementY(InputAction.CallbackContext context)
     {
         transversal = context.ReadValue<float>();
-    }
-    public void OnJumping()
-    {
-
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "room")
+        if (!sound.isPlaying)
         {
-            OnPlayerRoom1Collision();
+            music.PlayPlayer(SFX.AudioMixerGroup, walk.AudioClip);
+        }
+        if (context.ReadValue<float>() == 0)
+        {
+            sound.Stop();
         }
     }
+    //public void OnJumping()
+    //{
+
+    //}
 }

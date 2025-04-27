@@ -6,9 +6,7 @@ public class InteractableObjects : MonoBehaviour
 {
     [SerializeField] private AudioData audioData;
     [SerializeField] private AudioSettings audioSettings;
-
     public static event Action<AudioMixerGroup, AudioClip> OnCollisionMusic;
-
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Player"))
